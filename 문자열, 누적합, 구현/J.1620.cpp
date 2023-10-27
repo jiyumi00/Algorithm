@@ -1,35 +1,39 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+bool isNumber(string input){
+	if(atoi(input.c_str())!=0 || input.compare("0")==0){
+		return 1; //숫자	
+	}
+	else return 0;	//문자열 
+}
 int main(){
+	ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 	int pokemonCnt, testCnt,index;
-	vector<string>pokemonName;
+	map<string,int> pokemon;
+	map<int,string> pokemon2;
+	string input;
 	
 	cin>>pokemonCnt;
 	cin>>testCnt;
 	
-	for(int i=0;i<pokemonCnt;i++){
+	for(int i=1;i<=pokemonCnt;i++){
 		string name;
 		cin>>name;
-		pokemonName.push_back(name);
+		pokemon.insert({name,i});
+		pokemon2.insert({i,name});
 	}
+	
 	for(int i=0;i<testCnt;i++){
-		auto* input=&num;
-		cin>>num;
-		
-		if(num.c_str()==0){ //문자이면 
-			for(int j=0;j<pokemonName.size();j++){
-				if(pokemonName[i]==num){
-					index=i;
-				}
-			}
-			cout<<index+1;
+		cin>>input;
+		if(isNumber(input)){  
+			//숫자일때 = pokemon2  
+			cout<<pokemon2[stoi(input)]<<'\n';
 		}
 		else{
-			cout<<pokemonName[num-1];
-		} 
-		
+			//문자열일때 = pokemon 
+			cout<<pokemon[input]<<'\n';
+		}
 	}
 	return 0;
-
 }
