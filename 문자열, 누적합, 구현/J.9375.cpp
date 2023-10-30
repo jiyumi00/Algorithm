@@ -2,16 +2,38 @@
 using namespace std;
 
 int main(){
-	int testCnt,clothesCnt,clothesKindCnt;
-	map<string,string>clothes;
-	string clothesName,clothesKind;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int testCnt,clothesCnt;
+	string name,kind;
+	map<string,int>clothes;
 	
 	cin>>testCnt;
-	
 	for(int i=0;i<testCnt;i++){
 		cin>>clothesCnt;
-	
 		
-		clothes.clear();
+		for(int i=0;i<clothesCnt;i++){
+			cin>>name>>kind;
+			if(clothes.find(kind)!=clothes.end()){
+				clothes[kind]++;
+			}
+			else{
+				clothes.insert({kind,1});
+			}
+		}
+		
+		if(clothes.size()==1){
+			cout<<clothesCnt<<'\n';
+		}
+		else{
+			int multi=1;
+			for(auto it=clothes.begin();it!=clothes.end();++it){
+				multi*=it->second;
+			}
+			cout<<clothesCnt+multi<<'\n';
+		}
+		
+		clothes.clear();	
 	}
+
 }
