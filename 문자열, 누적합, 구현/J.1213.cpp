@@ -24,21 +24,18 @@ int main(){
 	}
 	else{ //팰린드롬 만들기 
 		for(int i=0;i<26;i++){
-			if(alphabetCnt[i]==1){ //1개이면 
+			if(alphabetCnt[i]%2!=0){ //홀수개이면 
 				oddChar=(char)i+65;
 			}
-			else{
-				if(alphabetCnt[i]%2!=0){ //홀수개 이면 
-					oddChar=(char)i+65;
-				}
-				for(int j=0;j<alphabetCnt[i]/2;j++){
-					word+=(char)i+65;
-				}
+			for(int j=0;j<alphabetCnt[i]/2;j++){
+				word+=(char)i+65;
 			}
 		}
 		output=word;
 		reverse(word.begin(),word.end());
-		output+=oddChar;
+		if(oddCnt==1){
+			output+=oddChar;
+		} 
 		output+=word;
 		
 	}
