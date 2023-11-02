@@ -4,7 +4,7 @@ using namespace std;
 int main(){
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
-	int testCnt,clothesCnt;
+	int testCnt,clothesCnt,multi=1;
 	string name,kind;
 	map<string,int>clothes;
 	
@@ -22,17 +22,11 @@ int main(){
 			}
 		}
 		
-		if(clothes.size()==1){
-			cout<<clothesCnt<<'\n';
+		for(auto iter : clothes){
+			multi*=iter.second+1;
 		}
-		else{
-			int multi=1;
-			for(auto it=clothes.begin();it!=clothes.end();++it){
-				multi*=it->second;
-			}
-			cout<<clothesCnt+multi<<'\n';
-		}
-		
+		cout<<multi-1<<'\n';
+		multi=1;
 		clothes.clear();	
 	}
 
