@@ -27,6 +27,7 @@ int main(){
 		for(int i=0;i<54;i++){
 			for(int j=0;j<54;j++){
 				a[i][j]=0;
+				visited[i][j]=0;
 			}
 		}
 		cin>>m>>n>>earthwormCnt;
