@@ -2,7 +2,7 @@
 using namespace std;
 
 int a[104][104],visited[104][104];
-int n,minNum=100,maxNum=1,ret,k,retMax;
+int n,ret=1,k,retMax;
 int dy[4]={-1,0,1,0};
 int dx[4]={0,1,0,-1};
 vector<int> rets;
@@ -27,16 +27,10 @@ int main(){
 	for(int i=0;i<n;i++){
 		for(int j=0;j<n;j++){
 			cin>>a[i][j];
-			if(minNum>a[i][j]){
-				minNum=a[i][j];
-			}
-			if(maxNum<a[i][j]){
-				maxNum=a[i][j];
-			}
 		}
 	}
 	
-	for(k=minNum;k<maxNum;k++){
+	for(k=0;k<=100;k++){
         fill(&visited[0][0], &visited[0][0] + 104 * 104, 0);
 		ret=0;
 		
