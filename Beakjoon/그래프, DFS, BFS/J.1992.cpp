@@ -1,74 +1,42 @@
 #include<bits/stdc++.h>
 using namespace std;
-
-int a[64][64];
+ 
 int n;
+string s;
+char a[101][101];
 
-int cnt[4];
-vector<char>output;
-void quadTree(int x, int y){
-	fill(&cnt[0],&cnt[0]+5,0);
-	cout<<"----왼쪽 위 ----"<<'\n';
-	for(int i=x;i<n/2+x;i++){
-		for(int j=y;j<n/2+y;j++){
-			cout<<a[i][j]; 
-			if(a[i][j]==1){
-				cnt[0]++;
+
+string quadTree(int x,int y,int size){
+	if(size==1) return string(1, a[x][y]);
+	char b=a[x][y];
+	string ret="";
+	for(int i=x;i<x+size;i++){
+		for(int j=y;j<y+size;j++){
+			if(b!=a[i][j]){
+				ret+='(';
+				ret+=quadTree(x,y,size/2);
+				ret+=quadTree(x,y+size/2,size/2);
+				ret+=quadTree(x+size/2,y,size/2);
+				ret+=quadTree(x+size/2,y+size/2,size/2);
+				ret+=')';
+				return ret;
 			}
+		
 		}
-		cout<<'\n';
 	}
-	
-	cout<<"----오른쪽 위 ----"<<'\n';
-	for(int i=x;i<n/2+x;i++){
-		for(int j=n/2+y;j<n;j++){
-			cout<<a[i][j];
-			if(a[i][j]==1){
-				cnt[1]++;
-			}
-		}
-		cout<<'\n';
-	}
-	cout<<"----왼쪽 아래 ----"<<'\n';
-	for(int i=n/2+x;i<n;i++){
-		for(int j=y;j<n/2+y;j++){
-			cout<<a[i][j];
-			if(a[i][j]==1){
-				cnt[2]++;
-			}
-		}
-		cout<<'\n';
-	}
-	cout<<"----오른쪽 아래 ----"<<'\n';
-	for(int i=n/2+x;i<n;i++){
-		for(int j=n/2+y;j<n;j++){
-			cout<<a[i][j];
-			if(a[i][j]==1){
-				cnt[3]++;
-			}
-		}
-		cout<<'\n';
-	}	
-	
-	
+	return string(1,a[x][y]);
 }
+
 int main(){
+	ios_base::sync_with_stdio(0); cin.tie(NULL);
 	cin>>n;
 	
 	for(int i=0;i<n;i++){
-		string s;
 		cin>>s;
 		for(int j=0;j<n;j++){
-			a[i][j]=s[j]-'0';
+			a[i][j]=s[j];
 		}
 	}
+	cout<<quadTree(0,0,n)<<'\n';
 	
-	quadTree(0,0);
-
-	cout<<'\n';
-	cout<<"lu: "<<str[0]<<'\n';
-	cout<<"ru: "<<str[1]<<'\n';
-	cout<<"ld: "<<str[2]<<'\n';
-	cout<<"rd: "<<str[3]<<'\n';
-	//cout<<output<<'\n';
 }
