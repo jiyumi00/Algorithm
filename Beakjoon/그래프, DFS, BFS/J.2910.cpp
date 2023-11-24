@@ -1,55 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool isVisible;
-int n,c,num,cnt;
-vector<int>rate;
-map<int,int>m;
+vector<int>nums;
+vector<int>cnts;
+int n,c,num,index,maxNum=0,maxIndex;
+
+bool cmp(int a,int b){
+	return a>b;
+}
 int main(){
 	cin>>n>>c;
 	
 	for(int i=0;i<n;i++){
 		cin>>num;
-		isVisible=0;
-		for(auto it=m.begin();it!=m.end();it++){
-			if(m.find(num)!=m.end()){
-				isVisible=1;
-				cnt=m.at(num);
-				break;
-			}
-		}
-		if(isVisible==1){
-			cnt++;
-			m[num]=cnt;
+		if(find(nums.begin(),nums.end(),num)!=nums.end()){
+			index=find(nums.begin(),nums.end(),num)-nums.begin();
+			cnts[index]++;
 		}
 		else{
-			m.insert({num,1});
-			rate.push_back(num);
-		}
+			nums.push_back(num);
+			cnts.push_back(1);
+		} 
 		
 	}
-	cout<<"-------map-------"<<'\n'; 
-	for(int item:rate){
-		
+	cout<<"nums"<<'\n';
+	for(int i:nums){
+		cout<<i<<" ";
 	}
-	for(auto it=m.begin();it!=m.end();it++){
-		
-		cout<<it->first<<" "<<it->second<<endl;
+	cout<<'\n';
+	cout<<"cnts"<<'\n';
+	for(int i:cnts){
+		cout<<i<<" ";
 	}
-	cout<<"-------rate-------"<<'\n';
-	for(int item:rate){
-		cout<<item<<"\n";
-		for(auto it=m.begin();it!=m.end();it++){
-			
-			if(m.find(item)!=m.end()){
-				for(int i=0;i<it->second;i++){
-					cout<<it->first<<" ";
-				}
-			}
-		}
-	}
-	
-	
-	
+	cout<<'\n';
 
+
+	
+	
 }
