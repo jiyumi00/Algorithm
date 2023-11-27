@@ -1,40 +1,34 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<int>nums;
-vector<int>cnts;
-int n,c,num,index,maxNum=0,maxIndex;
+int num[1004];
+map<int,int>mp,mp_first;
+vector<pair<int,int>>v;
+int n,c;
 
-bool cmp(int a,int b){
-	return a>b;
+bool cmp(pair<int,int>a, pair<int,int>b){
+	if(a.first==b.first){
+		return mp_first[a.second]<mp_first[b.second];
+	}
+	return a.first>b.first;
 }
 int main(){
 	cin>>n>>c;
 	
 	for(int i=0;i<n;i++){
-		cin>>num;
-		if(find(nums.begin(),nums.end(),num)!=nums.end()){
-			index=find(nums.begin(),nums.end(),num)-nums.begin();
-			cnts[index]++;
-		}
-		else{
-			nums.push_back(num);
-			cnts.push_back(1);
+		cin>>num[i]; mp[num[i]]++; //mp ºóµµ¼ö
+		if(mp_first[num[i]]==0){ //mp_first°¡ 0ÀÌ¸é ÀÎµ¦½º 
+			mp_first[num[i]]=i+1; 
 		} 
-		
 	}
-	cout<<"nums"<<'\n';
-	for(int i:nums){
-		cout<<i<<" ";
+	for(auto it:mp){
+		v.push_back({it.second,it.first});
 	}
-	cout<<'\n';
-	cout<<"cnts"<<'\n';
-	for(int i:cnts){
-		cout<<i<<" ";
+	sort(v.begin(),v.end(),cmp);
+	for(auto it:v){
+		for(int i=0;i<it.first;i++){
+			cout<<it.second<<" ";
+		}
 	}
-	cout<<'\n';
 
-
-	
-	
 }
