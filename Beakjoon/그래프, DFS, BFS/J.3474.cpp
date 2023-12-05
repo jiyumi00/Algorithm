@@ -1,26 +1,20 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-long long n,result,cnt;
-string num;
-int fact(int n){
-	if(n==1 || n==0) return 1;
-	return n*fact(n-1);
-}
+int t,n,ret2,ret5;
 int main(){
-	cin>>n;
-
-	result=fact(n);
-	cout<<result<<'\n';
-	num=to_string(result);
-	
-	for(int i=num.size()-1;i>0;i--){
-		if(num[i]!='0'){
-			break;
+	ios_base::sync_with_stdio(false);cin.tie(NULL); cout.tie(NULL);
+	cin>>t;
+	for(int i=0;i<t;i++){
+		cin>>n;
+		ret2=0; ret5=0;
+		for(int j=2;j<=n;j*=2){
+			ret2+=n/j;
 		}
-		else{
-			cnt++;
+		for(int j=5;j<=n;j*=5){
+			ret5+=n/j;
 		}
+		cout<<min(ret2,ret5)<<'\n';
 	}
-	cout<<cnt<<'\n';
+
 }
